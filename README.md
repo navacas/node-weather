@@ -3,16 +3,16 @@
 Se utilizan estos paquetes:
 
 `
-axios - npm install axios
-inquirer - npm install inquirer
-colors - npm install colors
-dotenv - npm install dotenv
+axios - npm install axios,
+inquirer - npm install inquirer,
+colors - npm install colors,
+dotenv - npm install dotenv,
 `
 
 APIS Externas consumidas:
 
 `
-Mapbox
+Mapbox,
 OpenWeather
 `
 
