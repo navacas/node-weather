@@ -72,18 +72,18 @@ const readInput = async( message ) => {
 
 }
 
-// Menú de borrado para que aparezcan todas las tareas
-const deleteListingTasks = async( tasks = []) => {
+// Menú para que aparezcan todos los lugares que se encontraron
+const listPlaces = async( places = []) => {
     // {
     //     value: '1',
     //     name: `${'1.'.green} Crear tarea`
     // },
 
-    const choices = tasks.map((task, i) => {
+    const choices = places.map((place, i) => {
         const idx = `${i + +1}.`.green;
         return {
-            value: task.id,
-            name: `${idx} ${task.desc}`
+            value: place.id,
+            name: `${idx} ${place.name}`
         }
     });
 
@@ -96,7 +96,7 @@ const deleteListingTasks = async( tasks = []) => {
         {
             type: 'list',
             name: 'id',
-            message: 'Borrar',
+            message: 'Select place: ',
             choices
         }
     ]
@@ -149,7 +149,7 @@ const showCheckList = async( tasks = []) => {
 }
 
 
-export { inquirerMenu, pause, readInput, deleteListingTasks, confirm, showCheckList };
+export { inquirerMenu, pause, readInput, listPlaces, confirm, showCheckList };
 
 
 
