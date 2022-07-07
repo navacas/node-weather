@@ -22,20 +22,26 @@ const main = async() =>{
                 
                 // Search the places
                 const places = await search.city(searchCity);
+
                 // Select the place
                 const idSelected = await listPlaces(places);
                 const placeSelected = places.find( l => l.id === idSelected);
-                // console.log(placeSelected);
+                
+
                 // Weather data of the place selected
+                const weather = await search.weatherPlace(placeSelected.lat, placeSelected.lng);
+                
 
                 // Show results
+                console.clear();
                 console.log('\nCity information: \n'.green);
-                console.log('City: ', placeSelected.name);
+                console.log('City: ', placeSelected.name.green);
                 console.log('Lat: ', placeSelected.lat);
                 console.log('Lng: ', placeSelected.lng);
-                console.log('Temperature: ');
-                console.log('Minimum: ');
-                console.log('Maximum: ');
+                console.log('Temperature: ', weather.temp);
+                console.log('Minimum: ', weather.min);
+                console.log('Maximum: ', weather.max);
+                console.log('How is the weather: ', weather.desc.green);
 
                 break;
         
