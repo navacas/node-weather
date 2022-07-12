@@ -25,7 +25,14 @@ const main = async() =>{
 
                 // Select the place
                 const idSelected = await listPlaces(places);
+
+                if (idSelected === '0') continue;
+
                 const placeSelected = places.find( l => l.id === idSelected);
+
+                 // record on db
+
+                 search.addSearchRecord( placeSelected.name);
                 
 
                 // Weather data of the place selected
@@ -43,6 +50,12 @@ const main = async() =>{
                 console.log('Maximum: ', weather.max);
                 console.log('How is the weather: ', weather.desc.green);
 
+                break;
+            case 2:
+                search.historyCapitalize.forEach( (place, i) => {
+                    const idx = `${i + 1}.`.green
+                    console.log(`${ idx } ${place}`);
+                })
                 break;
         
             default:

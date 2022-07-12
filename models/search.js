@@ -1,13 +1,25 @@
+import fs from 'fs';
 
 import axios from 'axios';
 
 
 class Searching {
 
-    history = ['Tegucigalpa', 'MAdrid', 'San josé'];
+    history = [];
+    dbPAth = './db/database.json';
 
     constructor(){
         // read DB is exists
+        this.readDB();
+    }
+
+    get historyCapitalize(){
+        return this.history.map( place =>{
+            let words = place.split(' ');
+            words = words.map( w => w[0].toUpperCase() + w.substring(1));
+
+            return words.join(' ');
+        })
     }
 
     get paramsMapbox(){
@@ -79,7 +91,36 @@ class Searching {
         }
     }
 
+    addSearchRecord(place = '') {
 
+        if(this.history.includes( place.toLocaleLowerCase())){
+            return;
+        }
+
+        this.history.unshift( place.toLocaleLowerCase() );
+
+        // record on db
+        this.saveDB();
+
+    }
+
+    saveDB(){
+
+        const payload = {
+            history: this.history
+        }
+        fs.writeFileSync( this.dbPAth, JSON.stringify(payload))
+    }
+
+    readDB(){
+        if ( !fs.existsSync(this.dbPAth)) return;
+
+        const info = fs.readFileSync( this.dbPAth, { encoding: 'utf-8'});
+        const data = JSON.parse( info );
+
+        this.history = data.history;
+
+    }
 
 
 
